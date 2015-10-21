@@ -1,0 +1,103 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Audio</h1>
+
+    <table class="record_properties table table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ entity.number }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Issaga</th>
+                <td>{{ entity.isSaga }}</td>
+            </tr>
+            <tr>
+                <th>Genre</th>
+                {% for genre in entity.genres %}
+                    <td>{{ genre.name }}{% if not loop.last %} {{",\n"|nl2br}} {% endif %}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Link</th>
+                <td>{{ entity.link }}</td>
+            </tr>
+            <tr>
+                <th>Uploadedby</th>
+                <td>{{ entity.uploadedBy }}</td>
+            </tr>
+            <tr>
+                <th>Author</th>
+                {% for author in entity.authors %}
+                    <td>{{ author.name }}{% if not loop.last %}, {% endif %}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <audio id="player" src="{{ entity.link }}" ontimeupdate="document.getElementById('tracktime').innerHTML = changeSecToMin(currentTime) + ' / ' +  changeSecToMin(duration);" preload></audio>                
+                <th>State</th>
+                <td>                    
+                    <button class="btn" onclick="document.getElementById('player').play()">Play</button>
+                    {#<button class="btn" onclick="document.getElementById('player').pause()">Pause</button>#}
+                    <button class="btn" onclick="stopAudio();">Stop</button>
+                     <button class="btn" onclick="goBack();">Go 20 Back</button>
+                    <span id="tracktime">0 / 0</span>                   
+                </td> 
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('audios') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('audios_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+<script type="text/javascript">
+    
+    var player = document.getElementById('player');
+
+    function changeSecToMin(seconds) 
+    {
+        sec = Math.floor( seconds );    
+        min = Math.floor( sec / 60 );
+        min = min >= 10 ? min : '0' + min;    
+        sec = Math.floor( sec % 60 );
+        sec = sec >= 10 ? sec : '0' + sec;    
+        return min + ':' + sec;
+    }
+
+    function stopAudio()
+    {
+        player.pause();
+        player.currentTime = 0;
+    }
+
+    function goBack()
+    {
+        player.pause();
+        player.currentTime = player.currentTime - 20;
+        player.play();
+    }
+</script>
+{% endblock %}
+

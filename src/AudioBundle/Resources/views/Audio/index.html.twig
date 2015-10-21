@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Audio list</h1>
+    <a href="{{ path('audios_new') }}" > 
+        <button class="btn">Ajouter un nouvel audio</button>
+    </a>
+
+    <table class="records_list table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Description</th>
+                <th>Issaga</th>
+                <th>Genre</th>
+                <th>Link</th>
+                <th>Uploadedby</th>
+                <th>Author</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.id }}</a></td>
+                <td><a href="{{ path('audios_show', { 'id': entity.id }) }}">{{ entity.name }}</td>
+                <td>{{ entity.number }}</td>
+                <td>{{ entity.description }}</td>
+                <td>{{ entity.isSaga }}</td>
+                {% for genre in entity.genres %}
+                    <td>{{ genre.name }}{% if not loop.last %}, {% endif %}</td>
+                {% endfor %}
+                <td>{{ entity.link }}</td>
+                <td>{{ entity.uploadedBy }}</td>
+                {% for author in entity.authors %}
+                    <td>{{ author.name }}{% if not loop.last %}, {% endif %}</td>
+                {% endfor %}
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('audios_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
