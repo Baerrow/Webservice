@@ -58,20 +58,13 @@
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('audios') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('audios_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <div class="btn">{{ form(delete_form) }}</div>
+    <a href="{{ path('audios_edit' , { 'id': entity.id }) }}" > 
+        <button class="btn">Editer</button>
+    </a>
+    <a href="{{ path('audios') }}" > 
+        <button class="btn">Retour</button>
+    </a>
 <script type="text/javascript">
     
     var player = document.getElementById('player');
