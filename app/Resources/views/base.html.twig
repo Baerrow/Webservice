@@ -6,15 +6,21 @@
         {% block stylesheets %}
             <link href="{{ asset('css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
             <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet" />
+            <link href="{{ asset('css/datatable.css') }}" type="text/css" rel="stylesheet" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <script type="text/javascript" src="{{ asset('js/jquery-1.11.3.min.js') }}"></script>
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('js/jquery-1.11.3.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/datatable.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('js/audio.js') }}"></script>
+        {% endblock %}
+
     </head>
     <body>
         <div class="container">
             {% block body %}
             {% endblock %}
         </div>
-        {% block javascripts %}{% endblock %}
+        
     </body>
 </html>
