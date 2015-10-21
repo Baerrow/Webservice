@@ -1,18 +1,18 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>User</h1>
+    <h1>{{ entity.login }}</h1>
 
     <table class="record_properties">
         <tbody>
-            <tr>
+            <!--<tr>
                 <th>Id</th>
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
                 <th>Login</th>
                 <td>{{ entity.login }}</td>
-            </tr>
+            </tr>-->
             <tr>
                 <th>Mail</th>
                 <td>{{ entity.mail }}</td>
@@ -20,18 +20,17 @@
             <tr>
                 <th>Password</th>
                 <td>{{ entity.password }}</td>
+
             </tr>
             <tr>
-                <th>Isadmin</th>
-                <td>{{ entity.isAdmin }}</td>
-            </tr>
-            <tr>
-                <th>Listento</th>
-                <td>{{ entity.listenTo }}</td>
-            </tr>
-            <tr>
-                <th>Uploaded</th>
-                <td>{{ entity.uploaded }}</td>
+                <th>Admin/Lambda</th>
+                <td>
+                    {% if entity.isAdmin %}
+                        Admon
+                    {% else %}
+                        Lambda
+                    {% endif %}
+                </td>
             </tr>
         </tbody>
     </table>

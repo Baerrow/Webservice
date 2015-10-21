@@ -5,8 +5,6 @@ namespace AudioBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use AuthorBundle\Entity\Author;
-use AuthorBundle\Entity\Genre;
 use Doctrine\ORM\EntityRepository;
 
 class AudioType extends AbstractType

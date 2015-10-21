@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
+    public function __construct()
+    {
+        $this->audioListened = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * @var integer
      *
@@ -50,18 +55,16 @@ class User
     private $isAdmin = false;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(name="ListenTo", type="json_array", nullable=true)
+     * @ORM\ManyToMany(targetEntity="AudioBundle\Entity\Audio", cascade={"persist"})
      */
-    private $listenTo = null;
+    private $audioListened;
 
     /**
      * @var array
      *
      * @ORM\Column(name="Uploaded", type="json_array", nullable=true)
      */
-    private $uploaded = null;
+    // private $uploaded = null;
 
 
     /**
@@ -171,27 +174,33 @@ class User
     }
 
     /**
-     * Set listenTo
+     * Add audioListened
      *
-     * @param array $listenTo
-     *
-     * @return User
+     * @param AudioBundle\Entity\Audio $audioListened
      */
-    public function setListenTo($listenTo)
+    public function addAudioListened(AudioBundle\Entity\Audio $audioListened)
     {
-        $this->listenTo = $listenTo;
-
-        return $this;
+        $this->audioListened[] = $audioListened;
     }
 
     /**
-     * Get listenTo
+     * Remove audioListened
      *
-     * @return array
+     * @param AudioBundle\Entity\Audio $audioListened
      */
-    public function getListenTo()
+    public function removeAudioListened(AudioBundle\Entity\Audio $audioListened)
     {
-        return $this->listenTo;
+        $this->audioListened->removeElement($audioListened);
+    }
+
+    /**
+     * Get audioListened
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getAudioListened()
+    {
+        return $this->audioListened;
     }
 
     /**
@@ -201,20 +210,20 @@ class User
      *
      * @return User
      */
-    public function setUploaded($uploaded)
-    {
-        $this->uploaded = $uploaded;
+    // public function setUploaded($uploaded)
+    // {
+    //     $this->uploaded = $uploaded;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * Get uploaded
      *
      * @return array
      */
-    public function getUploaded()
-    {
-        return $this->uploaded;
-    }
+    // public function getUploaded()
+    // {
+    //     return $this->uploaded;
+    // }
 }
