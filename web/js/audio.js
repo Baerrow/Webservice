@@ -1,7 +1,7 @@
 
 	$(document).ready(function()
 	{
-        $('#datable').DataTable();
+        $('.datable').DataTable();
     });
 
     var player = document.getElementById('player');

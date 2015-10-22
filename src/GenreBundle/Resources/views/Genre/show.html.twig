@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Genre</h1>
 
-    <table class="record_properties">
+    <table class="record_properties table table-striped">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -15,18 +15,12 @@
             </tr>
         </tbody>
     </table>
+   <div class="btn">{{ form(delete_form) }}</div>
+    <a href="{{ path('genres_edit' , { 'id': entity.id }) }}" > 
+        <button class="btn">Editer</button>
+    </a>
+    <a href="{{ path('genres') }}" > 
+        <button class="btn">Retour</button>
+    </a>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('genres') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('genres_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}
