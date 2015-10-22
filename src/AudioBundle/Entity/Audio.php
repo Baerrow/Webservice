@@ -58,12 +58,12 @@ class Audio
     private $isSaga = false;
 
     /**
-     * @ORM\ManyToMany(targetEntity="GenreBundle\Entity\Genre", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="GenreBundle\Entity\Genre", mappedBy="associatedAudio")
      */
     private $genres;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AuthorBundle\Entity\Author", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AuthorBundle\Entity\Author", mappedBy="productAudios")
      */
     private $authors;
 
@@ -75,9 +75,7 @@ class Audio
     private $link;
 
     /**
-     * @var guid
-     *
-     * @ORM\Column(name="UploadedBy", type="guid", nullable=true)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", mappedBy="audioUploaded")
      */
     private $uploadedBy;
 
@@ -195,6 +193,7 @@ class Audio
      */
     public function addGenre(Genre $genre){
         $this->genres[] = $genre;
+        $genre->addAssociatedAudios($this);
     }
 
     /**
@@ -204,6 +203,7 @@ class Audio
      */
     public function removeGenre(Genre $genre){
         $this->genres->removeElement($genre);
+        $genre->removeAssociatedAudios($this);
     }
 
     /**
@@ -224,6 +224,7 @@ class Audio
     public function addAuthor(Author $author)
     {
         $this->authors[] = $author;
+        $author->addProductAudios($this);
     }
 
     /**
@@ -234,6 +235,7 @@ class Audio
     public function removeAuthor(Author $author)
     {
         $this->authors->removeElement($author);
+        $author->removeProductAudios($this);
     }
 
     /**

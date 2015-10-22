@@ -3,6 +3,7 @@
 namespace AuthorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AudioBundle\Entity\Audio;
 
 /**
  * Author
@@ -12,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Author
 {
+    public function __construct()
+    {
+        $this->productAudios = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
     /**
      * @var integer
      *
@@ -34,6 +41,12 @@ class Author
      * @ORM\Column(name="Description", type="text")
      */
     private $description;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AudioBundle\Entity\Audio", inversedBy="authors")
+     * @ORM\JoinTable(name="audio_author")
+     */
+    private $productAudios;
 
 
     /**
@@ -92,5 +105,35 @@ class Author
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Add productAudios
+     *
+     * @param AudioBundle\Entity\Audio $productAudio
+     */
+    public function addProductAudios(Audio $productAudio)
+    {
+        $this->productAudios[] = $productAudios;
+    }
+
+    /**
+     * Remove productAudios
+     *
+     * @param AudioBundle\Entity\Audio $productAudio
+     */
+    public function removeProductAudios(Audio $productAudio)
+    {
+        $this->productAudios->removeElement($productAudio);
+    }
+
+    /**
+     * Get productAudios
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getProductAudios()
+    {
+        return $this->productAudios;
     }
 }

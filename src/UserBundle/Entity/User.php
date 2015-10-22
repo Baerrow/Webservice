@@ -3,6 +3,8 @@
 namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\UserListenToAudio;
+use AudioBundle\Entity\Audio;
 
 /**
  * User
@@ -15,6 +17,7 @@ class User
     public function __construct()
     {
         $this->audioListened = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->audioUploaded = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -55,11 +58,6 @@ class User
     private $isAdmin = false;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AudioBundle\Entity\Audio", cascade={"persist"})
-     */
-    // private $audioListened;
-
-    /**
      * @var array
      *
      * @ORM\Column(name="Uploaded", type="json_array", nullable=true)
@@ -69,7 +67,12 @@ class User
     /**
      * @ORM\OneToMany(targetEntity="UserBundle\Entity\UserListenToAudio", mappedBy="user")
      */
-    protected $audioListened;
+    private $audioListened;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AudioBundle\Entity\Audio", mappedBy="uploadedBy")
+     */
+    private $audioUploaded;
 
     /**
      * Get id
@@ -182,7 +185,7 @@ class User
      *
      * @param UserBundle\Entity\UserListenToAudio $audioListened
      */
-    public function addAudioListened(UserBundle\Entity\UserListenToAudio $audioListened)
+    public function addAudioListened(UserListenToAudio $audioListened)
     {
         $this->audioListened[] = $audioListened;
     }
@@ -192,7 +195,7 @@ class User
      *
      * @param UserBundle\Entity\UserListenToAudio $audioListened
      */
-    public function removeAudioListened(UserBundle\Entity\UserListenToAudio $audioListened)
+    public function removeAudioListened(UserListenToAudio $audioListened)
     {
         $this->audioListened->removeElement($audioListened);
     }
@@ -208,26 +211,32 @@ class User
     }
 
     /**
-     * Set uploaded
+     * Add audioUploaded
      *
-     * @param array $uploaded
-     *
-     * @return User
+     * @param AudioBundle\Entity\Audio $audioUploaded
      */
-    // public function setUploaded($uploaded)
-    // {
-    //     $this->uploaded = $uploaded;
-
-    //     return $this;
-    // }
+    public function addAudioUploaded(Audio $audioUploaded)
+    {
+        $this->audioUploaded[] = $audioUploaded;
+    }
 
     /**
-     * Get uploaded
+     * Remove audioUploaded
      *
-     * @return array
+     * @param AudioBundle\Entity\Audio $audioUploaded
      */
-    // public function getUploaded()
-    // {
-    //     return $this->uploaded;
-    // }
+    public function removeAudioUploaded(Audio $audioUploaded)
+    {
+        $this->audioUploaded->removeElement($audioUploaded);
+    }
+
+    /**
+     * Get audioUploaded
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getAudioUploaded()
+    {
+        return $this->audioUploaded;
+    }
 }

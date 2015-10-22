@@ -1,20 +1,43 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Genre</h1>
+    <h1>Genre - {{entity.name}} </h1>
 
-    <table class="record_properties table table-striped">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
+    <h3>Audios associés</h3>
+    
+    <table class="records_list table table-striped datable">
+        <thead>
             <tr>
                 <th>Name</th>
-                <td>{{ entity.name }}</td>
+                <th>Number</th>
+                <th>Description</th>
+                <th>Saga/OneShot</th>
+                <th>Author</th>
             </tr>
+        </thead>
+        <tbody>
+        {% for audio in entity.associatedAudios %}
+            <tr>
+                <td><a href="{{ path('audios_show', { 'id': entity.id }) }}">{{ audio.name }}</a></td>
+                <td>{{ audio.number }}</td>
+                <td>{{ audio.description }}</td>
+                <td>
+                    {% if audio.isSaga %}
+                        Saga
+                    {% else %}
+                        OneShot
+                    {% endif %}
+                </td>
+                <td>
+                    {% for author in audio.authors %}
+                        {{ author.name }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
+
    <div class="btn">{{ form(delete_form) }}</div>
     <a href="{{ path('genres_edit' , { 'id': entity.id }) }}" > 
         <button class="btn">Editer</button>

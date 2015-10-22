@@ -3,6 +3,7 @@
 namespace GenreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AudioBundle\Entity\Audio;
 
 /**
  * Genre
@@ -29,11 +30,10 @@ class Genre
     private $name;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(name="AssociatedAudio", type="json_array", nullable=true)
+     * @ORM\ManyToMany(targetEntity="AudioBundle\Entity\Audio", inversedBy="genres")
+     * @ORM\JoinTable(name="audio_genre")
      */
-    // private $associatedAudio = null;
+    private $associatedAudios;
 
 
     /**
@@ -71,26 +71,32 @@ class Genre
     }
 
     /**
-     * Set associateAudio
+     * Add associatedAudios
      *
-     * @param array $associateAudio
-     *
-     * @return Genre
+     * @param AudioBundle\Entity\Audio $associatedAudio
      */
-    // public function setAssociateAudio($associateAudio)
-    // {
-    //     $this->associateAudio = $associateAudio;
-
-    //     return $this;
-    // }
+    public function addAssociatedAudios(Audio $associatedAudio)
+    {
+        $this->associatedAudios[] = $associatedAudios;
+    }
 
     /**
-     * Get associateAudio
+     * Remove associatedAudios
      *
-     * @return array
+     * @param AudioBundle\Entity\Audio $associatedAudio
      */
-    // public function getAssociateAudio()
-    // {
-    //     return $this->associateAudio;
-    // }
+    public function removeAssociatedAudios(Audio $associatedAudio)
+    {
+        $this->associatedAudios->removeElement($associatedAudio);
+    }
+
+    /**
+     * Get associatedAudios
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getAssociatedAudios()
+    {
+        return $this->associatedAudios;
+    }
 }
