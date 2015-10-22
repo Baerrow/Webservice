@@ -58,13 +58,6 @@ class User
     private $isAdmin = false;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(name="Uploaded", type="json_array", nullable=true)
-     */
-    // private $uploaded = null;
-
-    /**
      * @ORM\OneToMany(targetEntity="UserBundle\Entity\UserListenToAudio", mappedBy="user")
      */
     private $audioListened;

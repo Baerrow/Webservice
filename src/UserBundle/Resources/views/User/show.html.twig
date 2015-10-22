@@ -34,10 +34,18 @@
             <tr>
                 <th>En écoute</th>
                 <td>
-                    {% for listened in audios %}
+                    {% for listened in audioListened %}
                         <p>
                             <a href="{{ path('audios_show', { 'id': listened.audio.id }) }}">{{listened.audio.name}} </a> arrêté à {{listened.stopTime | date("i:s")}}
                         </p> 
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Mis en ligne</th>
+                <td>
+                    {% for audioUp in audioUploaded %}
+                        <p> <a href="{{ path('audios_show', { 'id': audioUp.id }) }}">{{audioUp.name}} </a> </p> 
                     {% endfor %}
                 </td>
             </tr>

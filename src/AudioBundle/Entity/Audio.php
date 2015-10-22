@@ -5,6 +5,7 @@ namespace AudioBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use GenreBundle\Entity\Genre;
 use AuthorBundle\Entity\Author;
+use UserBundle\Entity\User;
 
 /**
  * Audio
@@ -276,21 +277,17 @@ class Audio
     /**
      * Set uploadedBy
      *
-     * @param guid $uploadedBy
-     *
-     * @return Audio
+     * @param UserBundle\Entity\User $uploadedBy
      */
-    public function setUploadedBy($uploadedBy)
+    public function setUploadedBy(User $uploadedBy)
     {
         $this->uploadedBy = $uploadedBy;
-
-        return $this;
     }
 
     /**
      * Get uploadedBy
      *
-     * @return guid
+     * @return UserBundle\Entity\User
      */
     public function getUploadedBy()
     {

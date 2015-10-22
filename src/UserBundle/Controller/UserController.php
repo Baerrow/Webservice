@@ -111,7 +111,8 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('UserBundle:User')->find($id);
-        $audios = $em->getRepository('UserBundle:UserListenToAudio')->findBy(array('user' => $id));
+        $audioListened = $em->getRepository('UserBundle:UserListenToAudio')->findBy(array('user' => $id));
+        $audioUploaded = $em->getRepository('AudioBundle:Audio')->findBy(array('uploadedBy' => $id));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -120,9 +121,10 @@ class UserController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'audios'       => $audios,
-            'delete_form' => $deleteForm->createView(),
+            'entity'              => $entity,
+            'audioListened'       => $audioListened,
+            'audioUploaded'       => $audioUploaded,
+            'delete_form'         => $deleteForm->createView(),
         );
     }
 

@@ -31,11 +31,17 @@ class AudioType extends AbstractType
                 )
             )
             ->add('link', 'text', array('label' => 'Lien de l\'audio :'))
-            ->add('uploadedBy', 'text', array('label' => 'Proposé par :'))
+            ->add('uploadedBy', 'entity', array(
+                'class' => 'UserBundle:User',
+                'choice_label' => 'login',
+                'label' => 'Mis en ligne par :'
+                )
+            )
             ->add('authors', 'entity', array(
                 'class' => 'AuthorBundle:Author',
                 'choice_label' => 'name',
-                'multiple' => true
+                'multiple' => true,
+                'label' => 'Auteur(s)'
                 )
             )
         ;

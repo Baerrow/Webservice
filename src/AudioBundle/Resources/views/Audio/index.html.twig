@@ -15,7 +15,7 @@
                 <th>Saga/OneShot</th>
                 <th>Genre</th>
                 <!--<th>Link</th>-->
-                <th>Uploadedby</th>
+                <th>Mis en ligne</th>
                 <th>Author</th>
             </tr>
         </thead>
@@ -38,7 +38,7 @@
                     {% endfor %}
                 </td>
                 <!--<td>{{ entity.link }}</td>-->
-                <td>{{ entity.uploadedBy }}</td>
+                <td>{{ entity.uploadedBy.login }}</td>
                 <td>
                     {% for author in entity.authors %}
                         {{ author.name }}{% if not loop.last %}, {% endif %}
