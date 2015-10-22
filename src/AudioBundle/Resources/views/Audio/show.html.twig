@@ -59,9 +59,9 @@
                 <audio id="player" src="{{ entity.link }}" ontimeupdate="document.getElementById('tracktime').innerHTML = changeSecToMin(currentTime) + ' / ' +  changeSecToMin(duration);" preload></audio>                
                 <th>State</th>
                 <td>                    
-                    <button class="btn" onclick="document.getElementById('player').play()">Play</button>
+                    <button class="btn" onclick="document.getElementById('player').play()"><span class="glyphicon glyphicon-play"></span></span></button>
                     {#<button class="btn" onclick="document.getElementById('player').pause()">Pause</button>#}
-                    <button class="btn" onclick="stopAudio();">Stop</button>
+                    <button class="btn" onclick="stopAudio();"><span class="glyphicon glyphicon-stop"></span></button>
                      <button class="btn" onclick="goBack();">Go 20 Back</button>
                     <span id="tracktime">0 / 0</span>                   
                 </td> 
