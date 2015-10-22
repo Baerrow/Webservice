@@ -57,7 +57,7 @@ class User
     /**
      * @ORM\ManyToMany(targetEntity="AudioBundle\Entity\Audio", cascade={"persist"})
      */
-    private $audioListened;
+    // private $audioListened;
 
     /**
      * @var array
@@ -66,6 +66,10 @@ class User
      */
     // private $uploaded = null;
 
+    /**
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\UserListenToAudio", mappedBy="user")
+     */
+    protected $audioListened;
 
     /**
      * Get id
@@ -176,9 +180,9 @@ class User
     /**
      * Add audioListened
      *
-     * @param AudioBundle\Entity\Audio $audioListened
+     * @param UserBundle\Entity\UserListenToAudio $audioListened
      */
-    public function addAudioListened(AudioBundle\Entity\Audio $audioListened)
+    public function addAudioListened(UserBundle\Entity\UserListenToAudio $audioListened)
     {
         $this->audioListened[] = $audioListened;
     }
@@ -186,9 +190,9 @@ class User
     /**
      * Remove audioListened
      *
-     * @param AudioBundle\Entity\Audio $audioListened
+     * @param UserBundle\Entity\UserListenToAudio $audioListened
      */
-    public function removeAudioListened(AudioBundle\Entity\Audio $audioListened)
+    public function removeAudioListened(UserBundle\Entity\UserListenToAudio $audioListened)
     {
         $this->audioListened->removeElement($audioListened);
     }

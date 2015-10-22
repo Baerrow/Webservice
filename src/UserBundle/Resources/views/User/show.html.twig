@@ -5,14 +5,14 @@
 
     <table class="record_properties">
         <tbody>
-            <!--<tr>
+            <!-- <tr>
                 <th>Id</th>
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
                 <th>Login</th>
                 <td>{{ entity.login }}</td>
-            </tr>-->
+            </tr> -->
             <tr>
                 <th>Mail</th>
                 <td>{{ entity.mail }}</td>
@@ -20,16 +20,25 @@
             <tr>
                 <th>Password</th>
                 <td>{{ entity.password }}</td>
-
             </tr>
             <tr>
                 <th>Admin/Lambda</th>
                 <td>
                     {% if entity.isAdmin %}
-                        Admon
+                        Admin
                     {% else %}
                         Lambda
                     {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>En écoute</th>
+                <td>
+                    {% for listened in audios %}
+                        <p>
+                            <a href="{{ path('audios_show', { 'id': listened.audio.id }) }}">{{listened.audio.name}} </a> arrêté à {{listened.stopTime | date("i:s")}}
+                        </p> 
+                    {% endfor %}
                 </td>
             </tr>
         </tbody>

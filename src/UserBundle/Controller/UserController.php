@@ -111,6 +111,7 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('UserBundle:User')->find($id);
+        $audios = $em->getRepository('UserBundle:UserListenToAudio')->findBy(array('user' => $id));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -120,6 +121,7 @@ class UserController extends Controller
 
         return array(
             'entity'      => $entity,
+            'audios'       => $audios,
             'delete_form' => $deleteForm->createView(),
         );
     }

@@ -3,6 +3,8 @@
 namespace AudioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use GenreBundle\Entity\Genre;
+use AuthorBundle\Entity\Author;
 
 /**
  * Audio
@@ -191,8 +193,7 @@ class Audio
      *
      * @param GenreBundle\Entity\Genre $genres
      */
-    public function addGenre(GenreBundle\Entity\Genre $genre)
-    {
+    public function addGenre(Genre $genre){
         $this->genres[] = $genre;
     }
 
@@ -201,8 +202,7 @@ class Audio
      *
      * @param GenreBundle\Entity\Genre $genres
      */
-    public function removeGenre(GenreBundle\Entity\Genre $genre)
-    {
+    public function removeGenre(Genre $genre){
         $this->genres->removeElement($genre);
     }
 
@@ -221,7 +221,7 @@ class Audio
      *
      * @param AuthorBundle\Entity\Author $authors
      */
-    public function addAuthor(AuthorBundle\Entity\Author $author)
+    public function addAuthor(Author $author)
     {
         $this->authors[] = $author;
     }
@@ -231,7 +231,7 @@ class Audio
      *
      * @param AuthorBundle\Entity\Author $authors
      */
-    public function removeAuthor(AuthorBundle\Entity\Author $author)
+    public function removeAuthor(Author $author)
     {
         $this->authors->removeElement($author);
     }
