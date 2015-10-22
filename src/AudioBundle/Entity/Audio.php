@@ -58,7 +58,8 @@ class Audio
     private $isSaga = false;
 
     /**
-     * @ORM\ManyToMany(targetEntity="GenreBundle\Entity\Genre", mappedBy="associatedAudio")
+     * @ORM\ManyToMany(targetEntity="GenreBundle\Entity\Genre", mappedBy="associatedAudios")
+     * @ORM\JoinTable(name="audio_genre")
      */
     private $genres;
 
@@ -75,7 +76,7 @@ class Audio
     private $link;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", mappedBy="audioUploaded")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="audioUploaded")
      */
     private $uploadedBy;
 
