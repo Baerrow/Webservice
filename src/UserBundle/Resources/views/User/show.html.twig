@@ -1,33 +1,21 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>{{ entity.login }}</h1>
+    <h1>Edition de l'utilisateur {{ entity.login }}</h1>
 
-    <table class="record_properties">
+    <table class="record_properties table table-striped">
         <tbody>
-            <!-- <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Login</th>
-                <td>{{ entity.login }}</td>
-            </tr> -->
             <tr>
                 <th>Mail</th>
                 <td>{{ entity.mail }}</td>
             </tr>
             <tr>
-                <th>Password</th>
-                <td>{{ entity.password }}</td>
-            </tr>
-            <tr>
-                <th>Admin/Lambda</th>
+                <th>Statut</th>
                 <td>
                     {% if entity.isAdmin %}
-                        Admin
+                        Administrateur
                     {% else %}
-                        Lambda
+                        Membre
                     {% endif %}
                 </td>
             </tr>
@@ -35,34 +23,31 @@
                 <th>En écoute</th>
                 <td>
                     {% for listened in audioListened %}
-                        <p>
                             <a href="{{ path('audios_show', { 'id': listened.audio.id }) }}">{{listened.audio.name}} </a> arrêté à {{listened.stopTime | date("i:s")}}
-                        </p> 
                     {% endfor %}
                 </td>
             </tr>
             <tr>
                 <th>Mis en ligne</th>
                 <td>
-                    {% for audioUp in audioUploaded %}
-                        <p> <a href="{{ path('audios_show', { 'id': audioUp.id }) }}">{{audioUp.name}} </a> </p> 
-                    {% endfor %}
+                    {#{% for audioUp in audioUploaded %}
+                        <a href="{{ path('audios_show', { 'id': audioUp.id }) }}">{{audioUp.name}} </a>
+                    {% endfor %}#}
+                    <select name="audios">
+                        <option>Choisissez</option>
+                        {% for audioUp in audioUploaded %}
+                            <option value="{ 'id': audioUp.id }) }}">{{ audioUp.name }}</option>
+                        {% endfor %}
+                </select>
                 </td>
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('users') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('users_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <div class="btn">{{ form(delete_form) }}</div>
+    <a href="{{ path('users_edit' , { 'id': entity.id }) }}" > 
+        <button class="btn">Editer</button>
+    </a>
+    <a href="{{ path('users') }}" > 
+        <button class="btn">Retour</button>
+    </a>
 {% endblock %}

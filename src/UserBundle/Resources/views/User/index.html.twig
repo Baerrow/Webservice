@@ -3,15 +3,12 @@
 {% block body -%}
     <h1>User list</h1>
 
-    <table class="records_list">
-        <thead>
+    <table class="records_list table table-striped datable">
+        <thead> 
             <tr>
                 <th>Login</th>
                 <th>Mail</th>
-                <th>Password</th>
-                <th>Isadmin</th>
-                <th>Admin/Lambda</th>
-                <th>Actions</th>
+                <th>Statut</th>
             </tr>
         </thead>
         <tbody>
@@ -19,34 +16,15 @@
             <tr>
                 <td><a href="{{ path('users_show', { 'id': entity.id }) }}">{{ entity.login }}</a></td>
                 <td>{{ entity.mail }}</td>
-                <td>{{ entity.password }}</td>
                 <td>
                     {% if entity.isAdmin %}
-                        Admin
+                        Administrateur
                     {% else %}
-                        Lambda
+                        Membre
                     {% endif %}
-                </td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('users_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('users_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('users_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}
