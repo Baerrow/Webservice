@@ -1,3 +1,0 @@
-genre:
-    resource: "@LoginBundle/Controller/"
-    type:     annotation

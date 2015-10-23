@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new UserBundle\UserBundle(),
             new PlaylistBundle\PlaylistBundle(),
             new AudioBundle\AudioBundle(),
-            new LoginBundle\LoginBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

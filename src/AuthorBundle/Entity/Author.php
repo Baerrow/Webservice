@@ -43,7 +43,7 @@ class Author
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AudioBundle\Entity\Audio", inversedBy="authors")
+     * @ORM\ManyToMany(targetEntity="AudioBundle\Entity\Audio", mappedBy="authors")
      * @ORM\JoinTable(name="audio_author")
      */
     private $productAudios;

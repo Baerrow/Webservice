@@ -30,11 +30,10 @@ class Genre
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AudioBundle\Entity\Audio", inversedBy="genres")
+     * @ORM\ManyToMany(targetEntity="AudioBundle\Entity\Audio", mappedBy="genres")
      * @ORM\JoinTable(name="audio_genre")
      */
     private $associatedAudios;
-
 
     /**
      * Get id
@@ -71,27 +70,27 @@ class Genre
     }
 
     /**
-     * Add associatedAudios
+     * Add audio
      *
-     * @param AudioBundle\Entity\Audio $associatedAudio
+     * @param AudioBundle\Entity\Audio $audio
      */
-    public function addAssociatedAudios(Audio $associatedAudio)
+    public function addAssociatedAudio(Audio $audio)
     {
-        $this->associatedAudios[] = $associatedAudios;
+        $this->associatedAudios[] = $audio;
     }
 
     /**
-     * Remove associatedAudios
+     * Remove audio
      *
-     * @param AudioBundle\Entity\Audio $associatedAudio
+     * @param AudioBundle\Entity\Audio $audio
      */
-    public function removeAssociatedAudios(Audio $associatedAudio)
+    public function removeAssociatedAudio(Audio $audio)
     {
-        $this->associatedAudios->removeElement($associatedAudio);
+        $this->associatedAudios->removeElement($audio);
     }
 
     /**
-     * Get associatedAudios
+     * Get audios
      *
      * @return Doctrine\Common\Collections\Collection
      */

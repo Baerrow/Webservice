@@ -61,13 +61,12 @@ class Audio
     private $isSaga = false;
 
     /**
-     * @ORM\ManyToMany(targetEntity="GenreBundle\Entity\Genre", mappedBy="associatedAudios")
-     * @ORM\JoinTable(name="audio_genre")
+     * @ORM\ManyToMany(targetEntity="GenreBundle\Entity\Genre", inversedBy="associatedAudios")
      */
     private $genres;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AuthorBundle\Entity\Author", mappedBy="productAudios")
+     * @ORM\ManyToMany(targetEntity="AuthorBundle\Entity\Author", inversedBy="productAudios")
      */
     private $authors;
 
@@ -79,7 +78,7 @@ class Audio
     private $link;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="audioUploaded")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="audioUploaded", cascade={"persist"})
      */
     private $uploadedBy;
 
@@ -191,36 +190,6 @@ class Audio
     }
 
     /**
-     * Add genres
-     *
-     * @param GenreBundle\Entity\Genre $genres
-     */
-    public function addGenre(Genre $genre){
-        $this->genres[] = $genre;
-        $genre->addAssociatedAudios($this);
-    }
-
-    /**
-     * Remove genres
-     *
-     * @param GenreBundle\Entity\Genre $genres
-     */
-    public function removeGenre(Genre $genre){
-        $this->genres->removeElement($genre);
-        $genre->removeAssociatedAudios($this);
-    }
-
-    /**
-     * Get genres
-     *
-     * @return Doctrine\Common\Collections\Collection
-     */
-    public function getGenres()
-    {
-        return $this->genres;
-    }
-
-    /**
      * Add authors
      *
      * @param AuthorBundle\Entity\Author $authors
@@ -250,6 +219,37 @@ class Audio
     public function getAuthors()
     {
         return $this->authors;
+    }
+
+    /**
+     * Add genre
+     *
+     * @param GenreBundle\Entity\Genre $genre
+     */
+    public function addGenre(Genre $genre)
+    {
+        $this->genres[] = $genre;
+    }
+
+    /**
+     * Remove genre
+     *
+     * @param GenreBundle\Entity\Genre $genre
+     */
+    public function removeGenre(Genre $genre)
+    {
+        $this->genres->removeElement($genre);
+        // $author->removeProductAudios($this);
+    }
+
+    /**
+     * Get genres
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getGenres()
+    {
+        return $this->genres;
     }
 
     /**
