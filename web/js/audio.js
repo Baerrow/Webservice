@@ -7,7 +7,18 @@
 	$(document).ready(function()
 	{
         $('.datable').DataTable();
+        stopTime();
+        
     });
+
+    function stopTime()
+    {
+        var player = document.getElementById('player');
+        if( !player.paused && player.currentTime > 0 && !player.ended)
+        {
+            player.currentTime = 429;
+        } 
+    }
 
     function playOne()
     {            
@@ -59,6 +70,17 @@
         player = document.getElementById('player');
         player.pause();
         player.currentTime = player.currentTime - 20;
+        var timepl = player.currentTime;
+        $.ajax(
+        {
+          method: "POST",
+          url: "",
+          data: { stopTime : timepl }
+        })
+          .done(function( msg ) {
+            alert( "Data Saved: " + msg );
+        });
+        
     }
 
     
