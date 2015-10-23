@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use GenreBundle\Entity\Genre;
 use AuthorBundle\Entity\Author;
 use UserBundle\Entity\User;
+use PlaylistBundle\Entity\Playlist;
 
 /**
  * Audio
@@ -19,6 +20,7 @@ class Audio
     {
         $this->genres = new \Doctrine\Common\Collections\ArrayCollection();
         $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->inPlaylist = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

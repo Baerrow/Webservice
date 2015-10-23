@@ -3,6 +3,7 @@
 namespace PlaylistBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AudioBundle\Entity\Audio;
 
 /**
  * Playlist
@@ -12,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Playlist
 {
+    public function __construct()
+    {
+        $this->listAudios = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->listPlaylists = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * @var integer
      *
@@ -36,12 +43,24 @@ class Playlist
     private $description;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(name="ListAudio", type="json_array")
+     * @ORM\ManyToMany(targetEntity="AudioBundle\Entity\Audio", cascade={"persist"})
+     * @ORM\JoinTable(name="playlist_audio")
      */
-    private $listAudio;
+    private $listAudios;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="PlaylistBundle\Entity\Playlist", mappedBy="listPlaylists")
+     */
+    private $inPlaylist;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="PlaylistBundle\Entity\Playlist", inversedBy="inPlaylist")
+     * @ORM\JoinTable(name="playlist_inPlaylist",
+     *      joinColumns={@ORM\JoinColumn(name="playlist_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinCOlumn(name="in_playlist", referencedColumnName="id")}
+     *)
+     */
+    private $listPlaylists;
 
     /**
      * Get id
@@ -102,27 +121,63 @@ class Playlist
     }
 
     /**
-     * Set listAudio
+     * Add listAudios
      *
-     * @param array $listAudio
-     *
-     * @return Playlist
+     * @param AudioBundle\Entity\Audio $listAudios
      */
-    public function setListAudio($listAudio)
+    public function addListAudios(Audio $listAudios)
     {
-        $this->listAudio = $listAudio;
-
-        return $this;
+        $this->listAudios[] = $listAudios;
     }
 
     /**
-     * Get listAudio
+     * Remove listAudios
      *
-     * @return array
+     * @param AudioBundle\Entity\Audio $listAudios
      */
-    public function getListAudio()
+    public function removeListAudios(Audio $listAudios)
     {
-        return $this->listAudio;
+        $this->listAudios->removeElement($listAudios);
+    }
+
+    /**
+     * Get listAudios
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getListAudios()
+    {
+        return $this->listAudios;
+    }
+
+    /**
+     * Add listPlaylists
+     *
+     * @param PlaylistBundle\Entity\Playlist $listPlaylists
+     */
+    public function addListPlaylists(Playlist $listPlaylists)
+    {
+        $this->listPlaylists[] = $listPlaylists;
+    }
+
+    /**
+     * Remove listPlaylists
+     *
+     * @param PlaylistBundle\Entity\Playlist $listPlaylists
+     */
+    public function removeListPlaylists(Playlist $listPlaylists)
+    {
+        $this->listPlaylists->removeElement($listPlaylists);
+    }
+
+    /**
+     * Get listPlaylists
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getListPlaylists()
+    {
+        return $this->listPlaylists;
     }
 }
 
