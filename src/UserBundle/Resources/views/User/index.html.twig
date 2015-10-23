@@ -1,7 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>User list</h1>
+    <h1>Liste d'utilisateurs</h1>
+    <a href="{{ path('users_new') }}" > 
+        <button class="btn">Ajouter un nouvel utilisateur</button>
+    </a>
 
     <table class="records_list table table-striped datable">
         <thead> 

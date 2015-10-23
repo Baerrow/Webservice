@@ -6,7 +6,9 @@
     <table class="record_properties">
         <tbody>
             <tr>
-                <th>Description</th>
+                <th>Description</th>                
+            </tr>
+            <tr>
                 <td>{{ entity.description }}</td>
             </tr>
         </tbody>
@@ -21,6 +23,7 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Genre</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +36,16 @@
                         {% for genre in audio.genres %}
                             {{ genre.name }}{% if not loop.last %}, {% endif %}
                         {% endfor %}
+                    </td>
+                    <script type="text/javascript">
+                        $(document).ready(playOne);
+                    </script>
+                    <td>
+                        <audio id="player" src="{{ audio.link }}" preload="auto"></audio>
+
+                        <button class="btn" id="btnPlay"><span class="glyphicon glyphicon-play"></span></button>
+                        <button class="btn" id="btnPause"><span class="glyphicon glyphicon-pause"></span></button>
+                        <button class="btn" id="btnActualPause">Pause -20</button>
                     </td>
                 </tr>
             {% endfor %}
@@ -56,20 +69,13 @@
                 </tr>
             {% endfor %}
             </tbody>
-        </table>
+        </table>        
     {% endif %}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('playlists') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('playlists_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <div class="btn">{{ form(delete_form) }}</div>
+    <a href="{{ path('playlists_edit' , { 'id': entity.id }) }}" > 
+        <button class="btn">Editer</button>
+    </a>
+    <a href="{{ path('playlists') }}" > 
+        <button class="btn">Retour</button>
+    </a>
 {% endblock %}

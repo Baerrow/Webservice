@@ -6,7 +6,9 @@
     {% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
     {{ form(edit_form) }}
 
-    <a href="{{ path('genres') }}"><button class="btn">Retour</button></a>
+    <a href="{{ path('genres_show', { 'id': entity.id }) }}">
+    	<button class="btn">Retour</button>
+    </a>
     {{ form(delete_form) }}
 
 {% endblock %}
