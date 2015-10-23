@@ -30,13 +30,6 @@ class UserType extends AbstractType
                 'required'  => false
                 )
             )
-            // ->add('audioListened', 'entity', array(
-            //     'class' => 'AudioBundle:Audio',
-            //     'choice_label' => 'name',
-            //     'multiple' => true,
-            //     'required' => false
-            //     )
-            // )
         ;
     }
     

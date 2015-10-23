@@ -1,53 +1,53 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Edition de l'utilisateur {{ entity.login }}</h1>
+    {% if app.session.get('filter') is not null and admin == true %}
+        <h1>Edition de l'utilisateur {{ entity.login }}</h1>
 
-    <table class="record_properties table table-striped">
-        <tbody>
-            <tr>
-                <th>Mail</th>
-                <td>{{ entity.mail }}</td>
-            </tr>
-            <tr>
-                <th>Statut</th>
-                <td>
-                    {% if entity.isAdmin %}
-                        Administrateur
-                    {% else %}
-                        Membre
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <th>En écoute</th>
-                <td>
-                    {% for listened in audioListened %}
-                            <a href="{{ path('audios_show', { 'id': listened.audio.id }) }}">{{listened.audio.name}} </a> arrêté à {{listened.stopTime | date("i:s")}}
-                    {% endfor %}
-                </td>
-            </tr>
-            <tr>
-                <th>Mis en ligne</th>
-                <td>
-                    {#{% for audioUp in audioUploaded %}
-                        <a href="{{ path('audios_show', { 'id': audioUp.id }) }}">{{audioUp.name}} </a>
-                    {% endfor %}#}
-                    <select name="audios">
-                        <option>Choisissez</option>
-                        {% for audioUp in audioUploaded %}
-                            <option value="{ 'id': audioUp.id }) }}">{{ audioUp.name }}</option>
+        <table class="record_properties table table-striped">
+            <tbody>
+                <tr>
+                    <th>Mail</th>
+                    <td>{{ entity.mail }}</td>
+                </tr>
+                <tr>
+                    <th>Statut</th>
+                    <td>
+                        {% if entity.isAdmin %}
+                            Administrateur
+                        {% else %}
+                            Membre
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>En écoute</th>
+                    <td>
+                        {% for listened in audioListened %}
+                                <a href="{{ path('audios_show', { 'id': listened.audio.id }) }}">{{listened.audio.name}} </a> arrêté à {{listened.stopTime | date("i:s")}} {% if not loop.last %}<br>{% endif %}
                         {% endfor %}
-                </select>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="btn">{{ form(delete_form) }}</div>
-    <a href="{{ path('users_edit' , { 'id': entity.id }) }}" > 
-        <button class="btn">Editer</button>
-    </a>
-    <a href="{{ path('users') }}" > 
-        <button class="btn">Retour</button>
-    </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Vos contributions</th>
+                    <td>
+                        {% for audioUp in audioUploaded %}
+                            {{ audioUp.name }} {% if not loop.last %}<br>{% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+
+        {% if app.session.get('filter') is not null and admin == true %}
+            <div class="btn">{{ form(delete_form) }}</div>
+            <a href="{{ path('users_edit' , { 'id': entity.id }) }}" > 
+                <button class="btn">Editer</button>
+            </a>
+        {% endif %}
+        <a href="{{ path('users') }}" > 
+            <button class="btn">Retour</button>
+        </a>
+    {% endif %}
 {% endblock %}

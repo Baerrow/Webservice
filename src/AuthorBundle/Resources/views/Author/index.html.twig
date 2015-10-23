@@ -9,15 +9,13 @@
     <table class="records_list table table-striped datable">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Description</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.id }}</td>
                 <td>
                     <a href="{{ path('authors_show', { 'id': entity.id }) }}">{{ entity.name }}</a>
                 </td>

@@ -266,24 +266,24 @@ class UserController extends Controller
             array('login' => $login, 'password' => $hash)
         );
 
-        $session = null;
-
         if($user != null){
             if(!isset($_SESSION)) { 
                 session_start();
             }
 
-            $mail = $user->getMail(); 
-
+            $userId = $user->getId();
+            $isAdmin = $user->getIsAdmin();
             $session = $this->get('session');
             $session->set('filter', array(
+                'userId'=> $userId,
                 'login' => $login,
-                'mail' => $mail
+                'admin' => $isAdmin
             ));
         } else {
-            $session->set('filter', array(
-                'error' => "Identifiants de connexion invalides"
-            ));
+            // $session->set('filter', array(
+            //     'error' => "Identifiants de connexion invalides"
+            // ));
+            return $this->redirect($this->generateUrl('audios'));
         }
 
         return $this->redirect($this->generateUrl('audios'));

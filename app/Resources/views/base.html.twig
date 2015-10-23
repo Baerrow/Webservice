@@ -21,7 +21,7 @@
         {% if app.session.get('filter') is not null %}
             {% set filter = app.session.get('filter') %}
             {% set login = filter.login %}
-            {% set mail = filter['mail'] %}
+            {% set admin = filter['admin'] %}
             {% if filter['error'] is defined %}
                 {% set error = filter['error'] %}
             {% endif %}
@@ -49,6 +49,9 @@
                             </form>
                         </li>
                     {% else %}
+                        <li>
+                            <a href="{{ path('users_show', {'id': filter.userId}) }}"><button class="btn btn-default">Mon profil</button></a>
+                        </li>
                         <li>
                             <form class="form-inline" action="{{ path('user_logout') }}" method="POST">
                               <button type="submit" class="btn btn-warning">Déconnexion</button>

@@ -9,14 +9,12 @@
     <table class="records_list table table-striped datable">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
+                <th>Nom</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.id }}</td>
                 <td><a href="{{ path('genres_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
             </tr>
         {% endfor %}

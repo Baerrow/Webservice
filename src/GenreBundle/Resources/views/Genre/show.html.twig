@@ -8,11 +8,11 @@
     <table class="records_list table table-striped datable">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Number</th>
+                <th>Nom</th>
+                <th>Numéro</th>
                 <th>Description</th>
                 <th>Saga/OneShot</th>
-                <th>Author</th>
+                <th>Auteur</th>
             </tr>
         </thead>
         <tbody>
@@ -37,11 +37,14 @@
         {% endfor %}
         </tbody>
     </table>
+    <br>
 
-   <div class="btn">{{ form(delete_form) }}</div>
-    <a href="{{ path('genres_edit' , { 'id': entity.id }) }}" > 
-        <button class="btn">Editer</button>
-    </a>
+    {% if app.session.get('filter') is not null and admin == true %}
+        <div class="btn">{{ form(delete_form) }}</div>
+        <a href="{{ path('genres_edit' , { 'id': entity.id }) }}" > 
+            <button class="btn">Editer</button>
+        </a>
+    {% endif %}
     <a href="{{ path('genres') }}" > 
         <button class="btn">Retour</button>
     </a>

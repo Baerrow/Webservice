@@ -1,6 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+{% if app.session.get('filter') is not null and admin == true %}
     <h1>Liste d'utilisateurs</h1>
     <a href="{{ path('users_new') }}" > 
         <button class="btn">Ajouter un nouvel utilisateur</button>
@@ -30,4 +31,7 @@
         {% endfor %}
         </tbody>
     </table>
+{% else %}
+    <h2>Il n'y a rien pour vous ici</h2>
+{% endif %}
     {% endblock %}

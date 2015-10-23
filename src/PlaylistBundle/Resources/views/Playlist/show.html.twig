@@ -19,8 +19,8 @@
         <table class="records_list table table-striped datable">
             <thead>
                 <tr>
-                    <th>Number</th>
-                    <th>Name</th>
+                    <th>Numéro</th>
+                    <th>Nom</th>
                     <th>Description</th>
                     <th>Genre</th>
                     <th></th>
@@ -57,7 +57,7 @@
         <table class="records_list table table-striped datable">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Nom</th>
                     <th>Description</th>
                 </tr>
             </thead>
@@ -71,10 +71,14 @@
             </tbody>
         </table>        
     {% endif %}
-    <div class="btn">{{ form(delete_form) }}</div>
-    <a href="{{ path('playlists_edit' , { 'id': entity.id }) }}" > 
-        <button class="btn">Editer</button>
-    </a>
+    <br>
+    
+    {% if app.session.get('filter') is not null and admin == true %}
+        <div class="btn">{{ form(delete_form) }}</div>
+        <a href="{{ path('playlists_edit' , { 'id': entity.id }) }}" > 
+            <button class="btn">Editer</button>
+        </a>
+    {% endif %}
     <a href="{{ path('playlists') }}" > 
         <button class="btn">Retour</button>
     </a>

@@ -55,7 +55,7 @@ class User
      *
      * @ORM\Column(name="IsAdmin", type="boolean")
      */
-    private $isAdmin = false;
+    private $isAdmin;
 
     /**
      * @ORM\OneToMany(targetEntity="UserBundle\Entity\UserListenToAudio", mappedBy="user")
