@@ -3,14 +3,12 @@
 {% block body -%}
     <h1>User edit</h1>
 
+	{% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('users') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+
+    <a href="{{ path('users_show', { 'id': entity.id }) }}">
+        <button class="btn">Retour</button>
+    </a>
+    {{ form(delete_form) }}
 {% endblock %}

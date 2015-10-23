@@ -7,7 +7,7 @@
     {{ form(edit_form) }}
 
 
-    <a href="{{ path('playlists') }}">
+    <a href="{{ path('playlists_show', { 'id': entity.id }) }}">
         <button class="btn">Retour</button>
     </a>
     {{ form(delete_form) }}
