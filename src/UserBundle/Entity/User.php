@@ -12,7 +12,7 @@ use AudioBundle\Entity\Audio;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="UserBundle\Entity\UserRepository")
  */
-class User
+class User 
 {
     public function __construct()
     {
@@ -132,9 +132,8 @@ class User
      *
      * @return User
      */
-    public function setPassword($password)
-    {
-        $this->password = $password;
+    public function setPassword($password) {
+        $this->password = sha1($password);
 
         return $this;
     }

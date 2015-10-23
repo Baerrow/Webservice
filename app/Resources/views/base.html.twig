@@ -18,17 +18,48 @@
 
     </head>
     <body>
-        
+        {% if app.session.get('filter') is not null %}
+            {% set filter = app.session.get('filter') %}
+            {% set login = filter.login %}
+            {% set mail = filter['mail'] %}
+            {% if filter['error'] is defined %}
+                {% set error = filter['error'] %}
+            {% endif %}
+        {% endif %}
         <div class="container">
             <nav class="navbar navbar-default">
                 <ul class="nav navbar-nav">
-                <li><a href="{{ path('audios') }}">Audios</a></li>
-                <li><a href="{{ path('authors') }}">Authors</a></li>
-                <li><a href="{{ path('playlists') }}">Playlists</a></li>
-                <li><a href="{{ path('genres') }}">Genres</a></li>
-                <li><a href="{{ path('users') }}">Users</a></li>
-            </ul>
-        </nav>
+                    <li><a href="{{ path('audios') }}">Audios</a></li>
+                    <li><a href="{{ path('authors') }}">Authors</a></li>
+                    <li><a href="{{ path('playlists') }}">Playlists</a></li>
+                    <li><a href="{{ path('genres') }}">Genres</a></li>
+                    <li><a href="{{ path('users') }}">Users</a></li>                    
+
+                    {% if login is not defined %}
+                        <li>
+                            <form class="form-inline" action="{{ path('users_login') }}" method="POST">
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="login" placeholder="Login">
+                              </div>
+                              <div class="form-group">
+                                <input type="password" class="form-control" name="password" placeholder="Mot de passe">
+                              </div>
+                              <button type="submit" class="btn btn-default">Connexion</button>
+                              <a href="{{ path('users_new') }}"><button class="btn btn-default">Inscription</button></a>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li>
+                            <form class="form-inline" action="{{ path('user_logout') }}" method="POST">
+                              <button type="submit" class="btn btn-warning">Déconnexion</button>
+                            </form>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+            <h1>{% if login is defined %} Bienvenue {{login}} {% endif %}</h1>
+            {% if error is defined %} {{error}} {% endif %}
             {% block body %}
             
             {% endblock %}

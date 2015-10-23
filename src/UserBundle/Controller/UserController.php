@@ -248,4 +248,56 @@ class UserController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * User login
+     *
+     * @Route("/login", name="users_login")
+     */
+    public function loginAction(Request $request)
+    {
+        $login = $request->request->get('login');
+        $password = $request->request->get('password');
+
+        $hash = sha1($password);
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('UserBundle:User')->findOneBy(
+            array('login' => $login, 'password' => $hash)
+        );
+
+        $session = null;
+
+        if($user != null){
+            if(!isset($_SESSION)) { 
+                session_start();
+            }
+
+            $mail = $user->getMail(); 
+
+            $session = $this->get('session');
+            $session->set('filter', array(
+                'login' => $login,
+                'mail' => $mail
+            ));
+        } else {
+            $session->set('filter', array(
+                'error' => "Identifiants de connexion invalides"
+            ));
+        }
+
+        return $this->redirect($this->generateUrl('audios'));
+    }
+
+    /**
+     * User logout
+     *
+     * @Route("/logout", name="user_logout")
+     */
+    public function logoutAction(Request $request)
+    {
+        session_destroy();
+
+        return $this->redirect($this->generateUrl('audios'));
+    }
 }
