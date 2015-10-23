@@ -16,7 +16,6 @@
                 <th>Genre</th>
                 <th>Mis en ligne</th>
                 <th>Auteur</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -42,17 +41,6 @@
                     {% for author in entity.authors %}
                         {{ author.name }}{% if not loop.last %}, {% endif %}
                     {% endfor %}
-                </td>
-                <td>
-                    <script type="text/javascript">
-                        $(document).ready(playOne);
-                    </script>
-
-                    <audio id="player" src="{{ entity.link }}" preload="auto"></audio>
-
-                    <button class="btn" id="btnPlay"><span class="glyphicon glyphicon-play"></span></button>
-                    <button class="btn" id="btnPause"><span class="glyphicon glyphicon-pause"></span></button>
-                    <button class="btn" id="btnActualPause">Pause -20</button>
                 </td>
             </tr>
         {% endfor %}
