@@ -310,4 +310,16 @@ class UserController extends Controller
 
         return $this->redirect($this->generateUrl('audios'));
     }
+
+    public function UserListeningToAudio()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $ulta = new UserListenToAudio;
+        $ulta = setUser('1');
+        $ulta = setAudio('2');
+        $ulta = setStopTime('429');
+
+        $em->persist($ulta);
+        $em->flush();
+    }
 }
