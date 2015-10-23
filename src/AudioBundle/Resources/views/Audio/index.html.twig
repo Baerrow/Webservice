@@ -43,19 +43,16 @@
                         {{ author.name }}{% if not loop.last %}, {% endif %}
                     {% endfor %}
                 </td>
-                <td>        
-                    {% if not loop.last %}                         
-                        <script type="text/javascript">
+                <td>
+                    <script type="text/javascript">
                         $(document).ready(playOne);
-                        
-                        </script>
-                    {% endif %}
-                    <audio id="player" src="{{ entity.link }}"></audio>
+                    </script>
+
+                    <audio id="player" src="{{ entity.link }}" preload="auto"></audio>
 
                     <button class="btn" id="btnPlay"><span class="glyphicon glyphicon-play"></span></button>
                     <button class="btn" id="btnPause"><span class="glyphicon glyphicon-pause"></span></button>
                     <button class="btn" id="btnActualPause">Pause -20</button>
-                    </script>
                 </td>
             </tr>
         {% endfor %}
