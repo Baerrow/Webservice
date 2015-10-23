@@ -14,7 +14,7 @@
                 <td>{{ entity.name }}</td>
             </tr>-->
             <tr>
-                <th>Number</th>
+                <th>Nombre</th>
                 <td>{{ entity.number }}</td>
             </tr>
             <tr>
@@ -40,7 +40,7 @@
                 </td>
             </tr>
             <tr>
-                <th>Link</th>
+                <th>Lien</th>
                 <td>{{ entity.link }}</td>
             </tr>
             <tr>
@@ -48,7 +48,7 @@
                 <td>{{ entity.uploadedBy.login }}</td>
             </tr>
             <tr>
-                <th>Author</th>
+                <th>Auteur</th>
                 <td>
                     {% for author in entity.authors %}
                         <a href="{{ path('authors_show', { 'id': author.id }) }}">{{ author.name }}</a>{% if not loop.last %}, {% endif %}

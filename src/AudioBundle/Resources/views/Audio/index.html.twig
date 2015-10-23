@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Audio list</h1>
+    <h1>Liste d'audios</h1>
     <a href="{{ path('audios_new') }}" > 
         <button class="btn">Ajouter un nouvel audio</button>
     </a>
@@ -9,14 +9,13 @@
     <table class="records_list table table-striped datable">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Number</th>
+                <th>Nom</th>
+                <th>Numéro</th>
                 <th>Description</th>
                 <th>Saga/OneShot</th>
                 <th>Genre</th>
-                <!--<th>Link</th>-->
                 <th>Mis en ligne</th>
-                <th>Author</th>
+                <th>Auteur</th>
             </tr>
         </thead>
         <tbody>
@@ -37,7 +36,6 @@
                         {{ genre.name }}{% if not loop.last %}, {% endif %}
                     {% endfor %}
                 </td>
-                <!--<td>{{ entity.link }}</td>-->
                 <td>{{ entity.uploadedBy.login }}</td>
                 <td>
                     {% for author in entity.authors %}
