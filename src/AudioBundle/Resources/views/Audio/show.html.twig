@@ -68,6 +68,8 @@
             </tr>
         </tbody>
     </table>
+    <br>
+
     <div class="btn">{{ form(delete_form) }}</div>
     <a href="{{ path('audios_edit' , { 'id': entity.id }) }}" > 
         <button class="btn">Editer</button>
@@ -75,5 +77,26 @@
     <a href="{{ path('audios') }}" > 
         <button class="btn">Retour</button>
     </a>
+    <br>
+
+    <h3>Vous pouvez aussi aimer</h3>
+    <table class="record_properties table table-striped">
+        <tbody>
+            {% for genre in entity.genres %}
+                <tr>
+                    <td>
+                        <a href="{{ path('genres_show', { 'id': genre.id }) }}">{{ genre.name }}</a>
+                    </td>
+                    <td>
+                        {% for i in 0..2 %}
+                            {% set audio = random(genre.associatedAudios) %}
+                            <a href="{{ path('audios_show', { 'id': audio.id }) }}">{{ audio.name }}</a>
+                        {% endfor %}
+                    </td>
+                </tr>                
+            {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}
 
