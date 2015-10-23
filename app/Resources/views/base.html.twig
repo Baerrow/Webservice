@@ -20,6 +20,7 @@
     <body>
         {% if app.session.get('filter') is not null %}
             {% set filter = app.session.get('filter') %}
+            {% set userId = filter['userId'] %}
             {% set login = filter.login %}
             {% set admin = filter['admin'] %}
             {% if filter['error'] is defined %}
@@ -50,7 +51,7 @@
                         </li>
                     {% else %}
                         <li>
-                            <a href="{{ path('users_show', {'id': filter.userId}) }}"><button class="btn btn-default">Mon profil</button></a>
+                            <a href="{{ path('users_show', {'id': userId}) }}"><button class="btn btn-default">Mon profil</button></a>
                         </li>
                         <li>
                             <form class="form-inline" action="{{ path('user_logout') }}" method="POST">
