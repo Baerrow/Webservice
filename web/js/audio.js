@@ -1,10 +1,42 @@
+//variables 
+
+    var w = 1; 
+    var player = document.getElementById('player');
+
 
 	$(document).ready(function()
 	{
         $('.datable').DataTable();
     });
 
-    var player = document.getElementById('player');
+    function playOne()
+    {            
+        var playerId = "player"+w;
+        var btnPlayId = "btnPlay"+w;
+        var btnPauseId = "btnPause"+w;
+        var btnActualPauseId = "btnActualPause"+w;
+
+        document.getElementById("player").id = playerId;
+        document.getElementById("btnPlay").id = btnPlayId;
+        document.getElementById("btnPause").id = btnPauseId;
+        document.getElementById("btnActualPause").id = btnActualPauseId;
+
+        document.getElementById(btnPlayId).addEventListener("click", function()
+        {
+            document.getElementById(playerId).play();
+        });
+        document.getElementById(btnPauseId).addEventListener("click", function()
+        {
+            document.getElementById(playerId).pause();
+        });
+        document.getElementById(btnActualPauseId).addEventListener("click", function()
+        {
+            document.getElementById(playerId).pause();
+        });
+        w++;
+    }
+
+        
     function changeSecToMin(seconds) 
     {
         sec = Math.floor( seconds );    
@@ -28,3 +60,5 @@
         player.pause();
         player.currentTime = player.currentTime - 20;
     }
+
+    
