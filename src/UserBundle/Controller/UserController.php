@@ -49,11 +49,21 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            $user_login = $this->getDoctrine()->getRepository('UserBundle:User')->findOneBy(array(
+                            'login' => $entity->getLogin()
+                        ));
+            $user_mail = $this->getDoctrine()->getRepository('UserBundle:User')->findOneBy(array(
+                            'mail' => $entity->getMail()
+                        ));
 
-            return $this->redirect($this->generateUrl('users_show', array('id' => $entity->getId())));
+            if (!isset($user_login) && !isset($user_mail)) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);
+                $em->flush();
+                return $this->redirect($this->generateUrl('users_show', array('id' => $entity->getId())));
+            } else {
+                return $this->redirect($this->generateUrl('users_create', array('error' => 'Utilisateur déjà dans la base de données')));
+            }
         }
 
         return array(

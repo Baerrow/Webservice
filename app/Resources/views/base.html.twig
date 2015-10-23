@@ -21,7 +21,7 @@
         {% if app.session.get('filter') is not null %}
             {% set filter = app.session.get('filter') %}
             {% set userId = filter['userId'] %}
-            {% set login = filter.login %}
+            {% set login = filter['login'] %}
             {% set admin = filter['admin'] %}
             {% if filter['error'] is defined %}
                 {% set error = filter['error'] %}

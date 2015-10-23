@@ -13,7 +13,7 @@ use AudioBundle\Form\AudioType;
 /**
  * Audio controller.
  *
- * @Route("/audios")
+ * @Route("/")
  */
 class AudioController extends Controller
 {
